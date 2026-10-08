@@ -1,225 +1,231 @@
 <!doctype html>
 <html lang="en">
   <head>
-
-    <title>Your personal website</title>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
-    <link rel="stylesheet" href="fonts/icomoon/style.css">
-
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/jquery-ui.css">
-    <link rel="stylesheet" href="css/owl.carousel.min.css">
-    <link rel="stylesheet" href="css/owl.theme.default.min.css">
-    <link rel="stylesheet" href="css/owl.theme.default.min.css">
-
-    <link rel="stylesheet" href="css/jquery.fancybox.min.css">
-
-    <link rel="stylesheet" href="css/bootstrap-datepicker.css">
-
-    <link rel="stylesheet" href="fonts/flaticon/font/flaticon.css">
-
-    <link rel="stylesheet" href="css/aos.css">
-
-    <link rel="stylesheet" href="css/style.css">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Jack Conley</title>
+    <meta name="description" content="Jack Conley is a software entrepreneur and researcher working across healthcare, machine learning, and quantum computing. Based in Colorado, with San Diego as a second home.">
+    <meta name="theme-color" content="#1a2b22">
+    <meta property="og:title" content="Jack Conley">
+    <meta property="og:description" content="Software entrepreneur and researcher at the intersection of healthcare, machine learning, and quantum computing.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://jconley-usd.github.io/images/10019.jpg">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect fill='%231a2b22' width='32' height='32'/%3E%3Cpath fill='%23e7c98a' d='M16 5l7 16h-3l2 6H10l2-6H9z'/%3E%3C/svg%3E">
+    <link rel="preload" as="image" href="images/10019.jpg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;1,9..144,500&family=Outfit:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/woods.css">
   </head>
-  <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
+  <body>
+    <a class="skip" href="#about">Skip to content</a>
+    <div class="progress" aria-hidden="true"></div>
+    <div class="sunspot" aria-hidden="true"></div>
+    <div class="grain" aria-hidden="true"></div>
+    <div class="trail-rail" aria-hidden="true"><span class="trail-fill"></span></div>
 
-
-  <div id="overlayer"></div>
-  <div class="loader">
-    <div class="spinner-border text-primary" role="status">
-      <span class="sr-only">Loading...</span>
-    </div>
-  </div>
-
-
-  <div class="site-wrap">
-
-    <div class="site-mobile-menu site-navbar-target">
-      <div class="site-mobile-menu-header">
-        <div class="site-mobile-menu-close mt-3">
-          <span class="icon-close2 js-menu-toggle"></span>
-        </div>
-      </div>
-      <div class="site-mobile-menu-body"></div>
-    </div>
-
-
-    <header class="site-navbar py-4 js-sticky-header site-navbar-target" role="banner">
-
-      <div class="container">
-        <div class="row align-items-center">
-
-          <div class="col-6 col-xl-2">
-            <h1 class="mb-0 site-logo"><a href="#" class="h2 mb-0">Your Name</a></h1>
-          </div>
-
-          <div class="col-12 col-md-10 d-none d-xl-block">
-            <nav class="site-navigation position-relative text-right" role="navigation">
-
-              <ul class="site-menu main-menu js-clone-nav mr-auto d-none d-lg-block">
-                <li><a href="#about-section" class="nav-link">About</a></li>
-                <li><a href="#projects-section" class="nav-link">Projects</a></li>
-                <li><a href="#contact-section" class="nav-link">Contact</a></li>
-              </ul>
-            </nav>
-          </div>
-
-
-          <div class="col-6 d-inline-block d-xl-none ml-md-0 py-3" style="position: relative; top: 3px;"><a href="#" class="site-menu-toggle js-menu-toggle float-right"><span class="icon-menu h3"></span></a></div>
-
-        </div>
-      </div>
-
+    <header class="nav">
+      <a class="brand" href="#top">Jack</a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+        <span class="sr-only">Open menu</span>
+        <span class="burger" aria-hidden="true"></span>
+      </button>
+      <ul class="nav-links" id="site-nav">
+        <li><a href="#about">About</a></li>
+        <li><a href="#work">Work</a></li>
+        <li><a href="#research">Research</a></li>
+        <li><a href="#rowing">Rowing</a></li>
+        <li><a href="#outdoors">Outdoors</a></li>
+      </ul>
     </header>
 
+    <main>
+      <section class="hero" id="top">
+        <div class="hero-media">
+          <img src="images/10019.jpg" alt="Crestone Needle, a fourteener in Colorado’s Sangre de Cristo range, under a clear blue sky">
+          <div class="hero-shade"></div>
+        </div>
+        <div class="drift" aria-hidden="true">
+          <span style="--x:12%;--t:16s;--delay:-4s;--s:28px;--c:#e2c27a"></span>
+          <span style="--x:28%;--t:19s;--delay:-11s;--s:-36px;--c:#c4894a"></span>
+          <span style="--x:47%;--t:21s;--delay:-7s;--s:18px;--c:#d8c49a"></span>
+          <span style="--x:63%;--t:15s;--delay:-2s;--s:-22px;--c:#8ea37a"></span>
+          <span style="--x:78%;--t:18s;--delay:-14s;--s:32px;--c:#c6a15a"></span>
+          <span style="--x:90%;--t:22s;--delay:-9s;--s:-16px;--c:#a67c52"></span>
+        </div>
+        <div class="grove" aria-hidden="true">
+          <svg class="pine" style="--x:-1%;--h:34vh;--d:-1s" viewBox="0 0 80 150"><path fill="#214033" d="M40 2l12 34h-7l14 30h-8l16 40H46v36H34V106H13l16-40h-8l14-30h-7z"/></svg>
+          <svg class="pine" style="--x:7%;--h:48vh;--d:-3.2s" viewBox="0 0 90 160"><path fill="#0e1c16" d="M45 0l16 40h-9l16 34h-10l18 46H52v34H38V120H14l18-46H22l16-34h-9z"/></svg>
+          <svg class="pine" style="--x:16%;--h:28vh;--d:-0.4s" viewBox="0 0 80 150"><path fill="#1a3329" d="M40 4l11 32h-6l13 28h-7l15 38H45v40H35V102H14l15-38h-7l13-28h-6z"/></svg>
+          <svg class="pine" style="--x:70%;--h:32vh;--d:-2.4s" viewBox="0 0 80 150"><path fill="#1b382c" d="M40 2l12 34h-7l14 30h-8l16 40H46v36H34V106H13l16-40h-8l14-30h-7z"/></svg>
+          <svg class="pine" style="--x:79%;--h:52vh;--d:-4.5s" viewBox="0 0 90 160"><path fill="#0c1812" d="M45 0l16 40h-9l16 34h-10l18 46H52v34H38V120H14l18-46H22l16-34h-9z"/></svg>
+          <svg class="pine" style="--x:90%;--h:38vh;--d:-1.6s" viewBox="0 0 80 150"><path fill="#163028" d="M40 4l11 32h-6l13 28h-7l15 38H45v40H35V102H14l15-38h-7l13-28h-6z"/></svg>
+          <svg class="pine" style="--x:98%;--h:24vh;--d:-2.8s" viewBox="0 0 80 150"><path fill="#10241c" d="M40 2l12 34h-7l14 30h-8l16 40H46v36H34V106H13l16-40h-8l14-30h-7z"/></svg>
+        </div>
+        <div class="grove-mist" aria-hidden="true"></div>
+        <div class="hero-copy">
+          <p class="kicker">Colorado · San Diego</p>
+          <h1><span>Jack</span><span>Conley</span></h1>
+          <p class="lede">I build where healthcare, machine learning, and quantum computing meet. Colorado is home. San Diego is the other one.</p>
+          <a class="step" href="#about">Step into the woods<i aria-hidden="true"></i></a>
+          <p class="hero-caption">Crestone Needle</p>
+        </div>
+      </section>
 
-
-
-    <div class="site-section cta-big-image border-bottom" id="about-section">
-      <div class="container" style="padding-top: 30px">
-        <div class="row">
-          <div class="col-lg-6 mb-5" data-aos="fade-up" data-aos-delay="">
-
-            <img src="" alt="Image of you of something fun" class="img-fluid">
-
-          </div>
-          <div class="col-lg-5 ml-auto" data-aos="fade-up" data-aos-delay="100">
-            <div class="mb-4">
-              <p>
-               Who you are
-              </p>
-              <p>
-                Professional info
-               </p>
-               <p>
-                Hobbies
-               </p>
-
-
+      <section class="sheet" id="about" data-section>
+        <div class="wrap about-grid">
+          <figure class="portrait reveal">
+            <img src="images/1783689280742.jpg" alt="Portrait of Jack Conley in a light gray blazer, with green leaves behind him">
+          </figure>
+          <div class="reveal" style="--d: 120ms">
+            <p class="kicker">01 — About</p>
+            <h2>Hello. I’m Jack.</h2>
+            <div class="prose">
+              <p>I’m a software entrepreneur and researcher working at the intersection of healthcare, machine learning, and quantum computing.</p>
+              <p>I’m based in Colorado, though a lot of my days are in California. San Diego has become a second home — where I study, row, and come back to between trips into the high country.</p>
+              <p>The rest of this page is the work itself: a billing platform for pathologists, a quantum model for clinical signals, a boat, and the mountains that keep the thinking honest.</p>
             </div>
-
-            
-
           </div>
         </div>
-      </div>
-    </div>
+      </section>
 
-
-
-    <section class="site-section border-bottom" id="projects-section">
-      <div class="container">
-        <div class="row mb-5 justify-content-center">
-          <div class="col-md-8 text-center">
-            <h2 class="section-title mb-3" data-aos="fade-up" data-aos-delay="">Projects</h2>
+      <section class="sheet" id="work" data-section>
+        <div class="wrap">
+          <div class="reveal">
+            <p class="kicker">02 — Work</p>
+            <h2>Software with a job <em>to do.</em></h2>
           </div>
-        </div>
-        <div class="row">
-          <div class="col-lg-6 mb-5" data-aos="fade-up" data-aos-delay="">
-          
-            <img src="" alt="Image of your project" class="img-fluid">
-          
-          </div>
-          <div class="col-lg-5 ml-auto" data-aos="fade-up" data-aos-delay="100">
-            <div class="mb-4">
-              <h3>Project Title</h3>
-              <p>
-               Motivation of the project
-              </p>
-              <p>
-              Functional requirements/what the project does
-              </p>
-              <p>
-              Project design
-              </p>
-              <p>
-              Implementation
-              </p>
 
-
+          <article class="entry reveal">
+            <div class="index">01</div>
+            <div>
+              <p class="role">Co-founder</p>
+              <h3>Syllo Solutions</h3>
+              <div class="prose">
+                <p>I co-founded Syllo Solutions, a medical billing and revenue-cycle platform that simplifies claims and revenue management for pathologists. I work across design, engineering, and strategy.</p>
+                <p>On the engineering side, that includes pro forma financial modeling and automated reporting that make the revenue cycle easier for a lab to see, and predictive models for reimbursement outcomes and denials. A lot of the effort goes toward a stubborn problem: fighting insurance denials with sharper automation.</p>
+              </div>
+              <p class="stat">
+                <span class="stat-num"><span class="sr-only">Over 30 million dollars</span><span aria-hidden="true">$<span data-count="30">0</span>M+</span></span>
+                <span class="stat-label">in transactions processed</span>
+              </p>
             </div>
+          </article>
 
-            
+          <article class="entry reveal" style="--d: 80ms">
+            <div class="index">02</div>
+            <div>
+              <p class="role">USAFA Aerospace Engineering Lab</p>
+              <h3>FalconSAT-9 &amp; FalconSAT-X</h3>
+              <div class="prose">
+                <p>Earlier, I developed software and hardware test applications for the reaction wheels and solar panels on FalconSAT-9 and FalconSAT-X.</p>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
 
+      <section class="shade" id="research" data-section>
+        <div class="wrap">
+          <div class="reveal">
+            <p class="kicker">03 — Research</p>
+            <h2>Quantum circuits for <em>clinical time series.</em></h2>
+            <div class="prose">
+              <p>As a student at the University of San Diego, I research quantum machine learning. The current project applies a Quantum Neural Information Optimization Network — QNION — to clinical time series, including sepsis onset and heart rate from autonomic data.</p>
+              <p>It uses variational quantum circuits benchmarked through qBraid. Training happens on a simulator. Inference runs on a quantum processor with the learned parameters held fixed. I presented the work as a conference poster with collaborators.</p>
+            </div>
+          </div>
+          <ol class="pipeline reveal" style="--d: 100ms">
+            <li>
+              <span>01</span>
+              <strong>Simulator</strong>
+              <p>Train the variational circuit against the clinical series.</p>
+            </li>
+            <li>
+              <span>02</span>
+              <strong>Hold</strong>
+              <p>Freeze the parameters once the model has settled.</p>
+            </li>
+            <li>
+              <span>03</span>
+              <strong>QPU</strong>
+              <p>Run inference on the quantum processor.</p>
+            </li>
+          </ol>
+          <ul class="chips reveal" style="--d: 160ms">
+            <li>Sepsis onset</li>
+            <li>Heart rate</li>
+            <li>Autonomic data</li>
+            <li>qBraid</li>
+          </ul>
+          <p class="poster-note reveal">Conference poster, with collaborators.</p>
+        </div>
+      </section>
+
+      <section class="sheet" id="rowing" data-section>
+        <div class="wrap boat-grid">
+          <div class="reveal">
+            <p class="kicker">04 — Competitive Rowing</p>
+            <h2>Great fun <em>on the water with the boys.</em></h2>
+            <div class="prose">
+              <p>I help lead USD Men’s Rowing as a captain. I organize team logistics, and I’m building a training application that generates weekly volume recommendations grounded in college rowing sports science.</p>
+              <p>The app turns that sports science into a recommendation for the week. Here's a fun clip of us rowing!</p>
+            </div>
+          </div>
+          <figure class="film reveal" style="--d: 120ms">
+            <video controls playsinline muted loop preload="metadata" aria-label="Video of rowing with USD Men’s Rowing">
+              <source src="images/IMG_0549.MP4" type="video/mp4">
+            </video>
+            <figcaption>USD Men’s Rowing</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section id="outdoors" data-section>
+        <div class="overlook">
+          <img src="images/10019.jpg" alt="">
+          <div class="overlook-shade"></div>
+          <div class="wrap">
+            <p class="kicker reveal">05 — Outdoors</p>
+            <blockquote class="quote reveal" style="--d: 80ms">Time outdoors is essential to creative thinking.</blockquote>
+            <p class="quote-by reveal" style="--d: 140ms">I protect space for it, especially between startup challenges. Rowing and surfing when I’m near water. Hiking whenever I can — Colorado’s fourteeners most of all. Crestone Needle, the peak in this photograph, is one of them.</p>
           </div>
         </div>
-      </div>
-      
-
-    </section>
-
-
-    <section class="site-section" id="contact-section" data-aos="fade">
-      <div class="container">
-        <div class="row mb-5">
-          <div class="col-12 text-center">
-            <h2 class="section-title mb-3">Contact Me</h2>
+        <div class="sheet habits">
+          <div class="wrap">
+            <ul class="notes">
+              <li class="reveal">
+                <h3>Water</h3>
+                <p>Rowing with the team, and surfing when the coast is close. Both are a way of paying attention for a long stretch of time.</p>
+              </li>
+              <li class="reveal" style="--d: 80ms">
+                <h3>Ridges</h3>
+                <p>I hike whenever I can, especially the fourteeners. The approach is usually through the trees. The summit is the part without them.</p>
+              </li>
+              <li class="reveal" style="--d: 140ms">
+                <h3>The habit</h3>
+                <p>Time outside is how the work stays any good. I keep it on purpose, including in the harder weeks.</p>
+              </li>
+            </ul>
           </div>
         </div>
-        <div class="row mb-5 text-center">
+      </section>
+    </main>
 
-
-
-          
-          
-          <div class="col-md-12 text-center">
-            <p class="mb-0">
-              <span class="icon-mail_outline d-block h4 text-primary"></span>
-              <span>email address</span>
-            </p>
-          </div>
-          
-          <div class="col-md-12 text-center">
-            <p class="mb-0">
-              <span class="icon-graduation-cap d-block h4 text-primary"></span>
-              <a href="">Resume</a>
-            </p>
-          </div>
+    <footer class="sheet close">
+      <div class="wrap">
+        <p class="kicker">The trailhead</p>
+        <h2>See you on the water, or above treeline.</h2>
+        <p class="where">Colorado · San Diego</p>
+        <div class="links">
+          <a class="textlink" href="https://github.com/jconley-usd" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">→</span></a>
+          <a class="textlink" href="#top">Back up the ridge <span aria-hidden="true">↑</span></a>
         </div>
-
-      </div>
-    </section>
-
-
-    <footer class="site-footer">
-      <div class="container">
-
-          <div class="col-md-12 text-center">
-            <p>
-            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-            Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This website builds on a template by <a href="https://colorlib.com" target="_blank" >Colorlib</a>
-            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-            </p>
-
-          </div>
-
-
+        <p class="fine">© <span id="year">2026</span> Jack Conley</p>
+        <p class="postscript">I’m also the CTO at Surfside Shells (my fiancée’s jewelry business). I manage the requests that come in from my CEO: build the best website and customer experience, and sell the best shell jewelry the world has ever seen.</p>
       </div>
     </footer>
 
-  </div> <!-- .site-wrap -->
-
-  <script src="js/jquery-3.3.1.min.js"></script>
-  <script src="js/jquery-ui.js"></script>
-  <script src="js/popper.min.js"></script>
-  <script src="js/bootstrap.min.js"></script>
-  <script src="js/owl.carousel.min.js"></script>
-  <script src="js/jquery.countdown.min.js"></script>
-  <script src="js/jquery.easing.1.3.js"></script>
-  <script src="js/aos.js"></script>
-  <script src="js/jquery.fancybox.min.js"></script>
-  <script src="js/jquery.sticky.js"></script>
-  <script src="js/isotope.pkgd.min.js"></script>
-  <script src="js/collapsable.js"></script>
-
-
-  <script src="js/main.js"></script>
-
+    <script src="js/woods.js"></script>
   </body>
 </html>
