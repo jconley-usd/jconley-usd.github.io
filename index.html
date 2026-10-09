@@ -54,20 +54,25 @@
           <span style="--x:90%;--t:22s;--delay:-9s;--s:-16px;--c:#a67c52"></span>
         </div>
         <div class="grove" aria-hidden="true">
-          <svg class="pine" style="--x:-1%;--h:34vh;--d:-1s" viewBox="0 0 80 150"><path fill="#214033" d="M40 2l12 34h-7l14 30h-8l16 40H46v36H34V106H13l16-40h-8l14-30h-7z"/></svg>
-          <svg class="pine" style="--x:7%;--h:48vh;--d:-3.2s" viewBox="0 0 90 160"><path fill="#0e1c16" d="M45 0l16 40h-9l16 34h-10l18 46H52v34H38V120H14l18-46H22l16-34h-9z"/></svg>
-          <svg class="pine" style="--x:16%;--h:28vh;--d:-0.4s" viewBox="0 0 80 150"><path fill="#1a3329" d="M40 4l11 32h-6l13 28h-7l15 38H45v40H35V102H14l15-38h-7l13-28h-6z"/></svg>
-          <svg class="pine" style="--x:70%;--h:32vh;--d:-2.4s" viewBox="0 0 80 150"><path fill="#1b382c" d="M40 2l12 34h-7l14 30h-8l16 40H46v36H34V106H13l16-40h-8l14-30h-7z"/></svg>
-          <svg class="pine" style="--x:79%;--h:52vh;--d:-4.5s" viewBox="0 0 90 160"><path fill="#0c1812" d="M45 0l16 40h-9l16 34h-10l18 46H52v34H38V120H14l18-46H22l16-34h-9z"/></svg>
-          <svg class="pine" style="--x:90%;--h:38vh;--d:-1.6s" viewBox="0 0 80 150"><path fill="#163028" d="M40 4l11 32h-6l13 28h-7l15 38H45v40H35V102H14l15-38h-7l13-28h-6z"/></svg>
-          <svg class="pine" style="--x:98%;--h:24vh;--d:-2.8s" viewBox="0 0 80 150"><path fill="#10241c" d="M40 2l12 34h-7l14 30h-8l16 40H46v36H34V106H13l16-40h-8l14-30h-7z"/></svg>
+          <svg class="sprite">
+            <symbol id="pine-mid" viewBox="0 0 80 150"><path d="M40 2l12 34h-7l14 30h-8l16 40H46v36H34V106H13l16-40h-8l14-30h-7z"/></symbol>
+            <symbol id="pine-tall" viewBox="0 0 90 160"><path d="M45 0l16 40h-9l16 34h-10l18 46H52v34H38V120H14l18-46H22l16-34h-9z"/></symbol>
+            <symbol id="pine-short" viewBox="0 0 80 150"><path d="M40 4l11 32h-6l13 28h-7l15 38H45v40H35V102H14l15-38h-7l13-28h-6z"/></symbol>
+          </svg>
+          <svg class="pine" style="--x:-1%;--h:34vh;--d:-1s" viewBox="0 0 80 150"><use href="#pine-mid" fill="#214033"/></svg>
+          <svg class="pine" style="--x:7%;--h:48vh;--d:-3.2s" viewBox="0 0 90 160"><use href="#pine-tall" fill="#0e1c16"/></svg>
+          <svg class="pine" style="--x:16%;--h:28vh;--d:-0.4s" viewBox="0 0 80 150"><use href="#pine-short" fill="#1a3329"/></svg>
+          <svg class="pine" style="--x:70%;--h:32vh;--d:-2.4s" viewBox="0 0 80 150"><use href="#pine-mid" fill="#1b382c"/></svg>
+          <svg class="pine" style="--x:79%;--h:52vh;--d:-4.5s" viewBox="0 0 90 160"><use href="#pine-tall" fill="#0c1812"/></svg>
+          <svg class="pine" style="--x:90%;--h:38vh;--d:-1.6s" viewBox="0 0 80 150"><use href="#pine-short" fill="#163028"/></svg>
+          <svg class="pine" style="--x:98%;--h:24vh;--d:-2.8s" viewBox="0 0 80 150"><use href="#pine-mid" fill="#10241c"/></svg>
         </div>
         <div class="grove-mist" aria-hidden="true"></div>
         <div class="hero-copy">
           <p class="kicker">Colorado · San Diego</p>
           <h1><span>Jack</span><span>Conley</span></h1>
           <p class="lede">I build where healthcare, machine learning, and quantum computing meet. Colorado is home. San Diego is the other one.</p>
-          <a class="step" href="#about">Step into the woods<i aria-hidden="true"></i></a>
+          <a class="step" href="#about">Step into the woods<span class="stem" aria-hidden="true"></span></a>
           <p class="hero-caption">Crestone Needle</p>
         </div>
       </section>

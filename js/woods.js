@@ -1,156 +1,162 @@
 (function () {
-  var root = document.documentElement;
+  const root = document.documentElement;
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const finePointer = window.matchMedia("(pointer: fine)").matches;
+  const sectionViewMark = 0.38;
+  const overlookShift = -0.12;
+  const countDurationMs = 1200;
+
+  const nav = document.querySelector(".nav");
+  const toggle = document.querySelector(".nav-toggle");
+  const menuLabel = toggle ? toggle.querySelector(".sr-only") : null;
+  const links = Array.from(document.querySelectorAll(".nav-links a"));
+  const sections = Array.from(document.querySelectorAll("[data-section]"));
+  const fill = document.querySelector(".trail-fill");
+  const bar = document.querySelector(".progress");
+  const spot = document.querySelector(".sunspot");
+  const overlook = document.querySelector(".overlook");
+  const overlookImg = overlook ? overlook.querySelector("img") : null;
+  const year = document.getElementById("year");
+  const reveals = Array.from(document.querySelectorAll(".reveal"));
+  const counters = Array.from(document.querySelectorAll("[data-count]"));
+  const video = document.querySelector(".film video");
+
   root.classList.add("js");
-
-  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  var fine = window.matchMedia("(pointer: fine)").matches;
-
-  var nav = document.querySelector(".nav");
-  var toggle = document.querySelector(".nav-toggle");
-  var links = Array.prototype.slice.call(document.querySelectorAll(".nav-links a"));
-  var sections = Array.prototype.slice.call(document.querySelectorAll("[data-section]"));
-  var fill = document.querySelector(".trail-fill");
-  var bar = document.querySelector(".progress");
-  var spot = document.querySelector(".sunspot");
-  var overlook = document.querySelector(".overlook");
-  var overlookImg = overlook ? overlook.querySelector("img") : null;
-  var year = document.getElementById("year");
-
   if (year) year.textContent = String(new Date().getFullYear());
 
-  function closeMenu() {
+  function setMenuOpen(open) {
     if (!nav || !toggle) return;
-    nav.classList.remove("is-open");
-    document.body.classList.remove("menu-open");
-    toggle.setAttribute("aria-expanded", "false");
-    toggle.querySelector(".sr-only").textContent = "Open menu";
+    nav.classList.toggle("is-open", open);
+    document.body.classList.toggle("menu-open", open);
+    toggle.setAttribute("aria-expanded", open ? "true" : "false");
+    if (menuLabel) menuLabel.textContent = open ? "Close menu" : "Open menu";
   }
 
-  if (toggle && nav) {
-    toggle.addEventListener("click", function () {
-      var open = nav.classList.toggle("is-open");
-      document.body.classList.toggle("menu-open", open);
-      toggle.setAttribute("aria-expanded", open ? "true" : "false");
-      toggle.querySelector(".sr-only").textContent = open ? "Close menu" : "Open menu";
+  function allowBlockedAutoplay() {}
+
+  function whenVisible(nodes, onEnter, options) {
+    if (!("IntersectionObserver" in window)) {
+      nodes.forEach(onEnter);
+      return;
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        onEnter(entry.target);
+        observer.unobserve(entry.target);
+      });
+    }, options);
+
+    nodes.forEach((node) => observer.observe(node));
+  }
+
+  function animateCount(node) {
+    const target = Number(node.getAttribute("data-count"));
+    if (reduceMotion) {
+      node.textContent = String(target);
+      return;
+    }
+
+    const start = performance.now();
+
+    function tick(now) {
+      const progress = Math.min(1, (now - start) / countDurationMs);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      node.textContent = String(Math.round(target * eased));
+      if (progress < 1) requestAnimationFrame(tick);
+    }
+
+    requestAnimationFrame(tick);
+  }
+
+  function paintProgress(progress) {
+    if (bar) bar.style.transform = `scaleX(${progress})`;
+    if (fill) fill.style.transform = `scaleY(${progress})`;
+  }
+
+  function markCurrentSection(scrolled) {
+    const marker = scrolled + window.innerHeight * sectionViewMark;
+    let current = "";
+
+    sections.forEach((section) => {
+      if (section.offsetTop <= marker) current = section.id;
+    });
+
+    links.forEach((link) => {
+      link.classList.toggle("is-current", link.getAttribute("href") === `#${current}`);
     });
   }
 
-  links.forEach(function (link) {
-    link.addEventListener("click", closeMenu);
+  function parallaxOverlook() {
+    if (!overlook || !overlookImg || reduceMotion) return;
+
+    const rect = overlook.getBoundingClientRect();
+    const inView = rect.bottom > 0 && rect.top < window.innerHeight;
+    if (!inView) return;
+
+    overlookImg.style.transform = `translate3d(0, ${rect.top * overlookShift}px, 0)`;
+  }
+
+  function onScroll() {
+    const scrolled = window.scrollY;
+    const range = document.documentElement.scrollHeight - window.innerHeight;
+    paintProgress(range > 0 ? scrolled / range : 0);
+    markCurrentSection(scrolled);
+    parallaxOverlook();
+  }
+
+  if (toggle && nav) {
+    toggle.addEventListener("click", () => {
+      setMenuOpen(!nav.classList.contains("is-open"));
+    });
+  }
+
+  links.forEach((link) => {
+    link.addEventListener("click", () => setMenuOpen(false));
   });
 
-  document.addEventListener("keydown", function (event) {
-    if (event.key === "Escape") closeMenu();
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") setMenuOpen(false);
   });
 
-  if (spot && fine && !reduce) {
+  if (spot && finePointer && !reduceMotion) {
     root.classList.add("has-pointer");
     window.addEventListener(
       "pointermove",
-      function (event) {
-        spot.style.transform = "translate3d(" + event.clientX + "px, " + event.clientY + "px, 0)";
+      (event) => {
+        spot.style.transform = `translate3d(${event.clientX}px, ${event.clientY}px, 0)`;
       },
       { passive: true }
     );
   }
 
-  var reveals = Array.prototype.slice.call(document.querySelectorAll(".reveal"));
-  if (!reduce && "IntersectionObserver" in window) {
-    var revealObserver = new IntersectionObserver(
-      function (entries) {
-        entries.forEach(function (entry) {
-          if (!entry.isIntersecting) return;
-          entry.target.classList.add("in");
-          revealObserver.unobserve(entry.target);
-        });
-      },
+  if (reduceMotion) {
+    reveals.forEach((node) => node.classList.add("in"));
+  } else {
+    whenVisible(
+      reveals,
+      (node) => node.classList.add("in"),
       { threshold: 0.16, rootMargin: "0px 0px -8% 0px" }
     );
-    reveals.forEach(function (el) {
-      revealObserver.observe(el);
-    });
-  } else {
-    reveals.forEach(function (el) {
-      el.classList.add("in");
-    });
   }
 
-  function animateCount(el) {
-    var target = Number(el.getAttribute("data-count"));
-    if (reduce) {
-      el.textContent = String(target);
-      return;
-    }
-    var start = performance.now();
-    var duration = 1200;
-    function tick(now) {
-      var t = Math.min(1, (now - start) / duration);
-      var eased = 1 - Math.pow(1 - t, 3);
-      el.textContent = String(Math.round(target * eased));
-      if (t < 1) requestAnimationFrame(tick);
-    }
-    requestAnimationFrame(tick);
-  }
+  whenVisible(counters, animateCount, { threshold: 0.7 });
 
-  var counters = Array.prototype.slice.call(document.querySelectorAll("[data-count]"));
-  if ("IntersectionObserver" in window) {
-    var countObserver = new IntersectionObserver(
-      function (entries) {
-        entries.forEach(function (entry) {
-          if (!entry.isIntersecting) return;
-          animateCount(entry.target);
-          countObserver.unobserve(entry.target);
-        });
-      },
-      { threshold: 0.7 }
-    );
-    counters.forEach(function (el) {
-      countObserver.observe(el);
-    });
-  } else {
-    counters.forEach(animateCount);
-  }
-
-  var video = document.querySelector(".film video");
   if (video && "IntersectionObserver" in window) {
-    var videoObserver = new IntersectionObserver(
-      function (entries) {
-        entries.forEach(function (entry) {
-          if (entry.isIntersecting) {
-            var playPromise = video.play();
-            if (playPromise && playPromise.catch) playPromise.catch(function () {});
-          } else {
-            video.pause();
-          }
-        });
-      },
-      { threshold: 0.45 }
-    );
+    const videoObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) {
+          video.pause();
+          return;
+        }
+
+        const playPromise = video.play();
+        if (playPromise) playPromise.catch(allowBlockedAutoplay);
+      });
+    }, { threshold: 0.45 });
+
     videoObserver.observe(video);
-  }
-
-  function onScroll() {
-    var scrolled = window.scrollY || window.pageYOffset;
-    var height = document.documentElement.scrollHeight - window.innerHeight;
-    var progress = height > 0 ? scrolled / height : 0;
-    if (bar) bar.style.transform = "scaleX(" + progress + ")";
-    if (fill) fill.style.transform = "scaleY(" + progress + ")";
-
-    var marker = scrolled + window.innerHeight * 0.38;
-    var current = "";
-    sections.forEach(function (section) {
-      if (section.offsetTop <= marker) current = section.id;
-    });
-    links.forEach(function (link) {
-      link.classList.toggle("is-current", link.getAttribute("href") === "#" + current);
-    });
-
-    if (overlook && overlookImg && !reduce) {
-      var rect = overlook.getBoundingClientRect();
-      if (rect.bottom > 0 && rect.top < window.innerHeight) {
-        overlookImg.style.transform = "translate3d(0, " + rect.top * -0.12 + "px, 0)";
-      }
-    }
   }
 
   window.addEventListener("scroll", onScroll, { passive: true });
