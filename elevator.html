@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Elevator Simulator — Jack Conley</title>
+    <meta name="description" content="An elevator simulator for a building with four kinds of cars, and the part I built: the rules for which trips each car will take.">
+    <meta name="robots" content="noindex">
+    <meta name="theme-color" content="#1a2b22">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect fill='%231a2b22' width='32' height='32'/%3E%3Cpath fill='%23e7c98a' d='M16 5l7 16h-3l2 6H10l2-6H9z'/%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;1,9..144,500&family=Outfit:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/woods.css">
+  </head>
+  <body>
+    <a class="skip" href="#elevator">Skip to content</a>
+    <div class="progress" aria-hidden="true"></div>
+    <div class="sunspot" aria-hidden="true"></div>
+    <div class="grain" aria-hidden="true"></div>
+    <div class="trail-rail" aria-hidden="true"><span class="trail-fill"></span></div>
+
+    <header class="nav">
+      <a class="brand" href="index.html">Jack</a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+        <span class="sr-only">Open menu</span>
+        <span class="burger" aria-hidden="true"></span>
+      </button>
+      <ul class="nav-links" id="site-nav">
+        <li><a href="#elevator">Project</a></li>
+        <li><a href="#works">How it works</a></li>
+        <li><a href="#design">Design</a></li>
+        <li><a href="#built">What I built</a></li>
+      </ul>
+    </header>
+
+    <main>
+      <section class="sheet lead" id="elevator" data-section>
+        <div class="wrap">
+          <div class="reveal">
+            <p class="kicker">COMP 305 · Group project</p>
+            <h2>Elevator <em>simulator.</em></h2>
+          </div>
+          <div class="prose reveal" style="--d: 80ms">
+            <p>Elevator Simulator runs a building. You choose how tall it is, which elevators are in it, and a list of people who need a ride. The program then steps through the day one floor at a time: a scheduler offers each request to a car that is allowed to take it, the cars move, and a short log shows where everyone is.</p>
+          </div>
+          <figure class="diagram reveal" style="--d: 140ms">
+            <div class="diagram-scroll">
+              <img src="images/elevator-uml.png" alt="Class diagram of the elevator simulator. Elevator is extended by standard, freight, penthouse, and express cars. Scheduler is implemented by a simple and a complex scheduler. Simulator runs the building and reads calls.">
+            </div>
+            <figcaption>How the building is divided</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="sheet" id="works" data-section>
+        <div class="wrap">
+          <div class="reveal">
+            <p class="kicker">What it does</p>
+            <h2>A building you can <em>set up.</em></h2>
+          </div>
+          <div class="prose reveal" style="--d: 80ms">
+            <p>A prompt asks for the number of floors, a simple or a more careful scheduler, how many of each elevator to include, and a file of ride requests. Each request is two floors: where someone is standing, and where they want to go.</p>
+            <p>From there the building runs on its own. Each round, the scheduler hands a waiting request to an elevator whose rules allow that trip. Every car then moves a single floor. It picks a passenger up on arrival and lets them off at the destination. A car with nothing left to do heads back to the lobby. If a request can never be served, the program says so and continues. The log after each round is the whole interface: the car, its floor, its direction, who it is carrying, and who is still waiting. That is enough to try a building and see whether it behaves the way you hoped.</p>
+          </div>
+
+          <article class="entry reveal">
+            <div class="index">01</div>
+            <div>
+              <h3>Standard</h3>
+              <div class="prose">
+                <p>The ordinary car. It takes a real trip inside the building that continues in the direction it is already going. Waiting empty in the lobby, it can head either way.</p>
+              </div>
+            </div>
+          </article>
+
+          <article class="entry reveal" style="--d: 60ms">
+            <div class="index">02</div>
+            <div>
+              <h3>Express</h3>
+              <div class="prose">
+                <p>Serves the lobby and the upper half of the building. Empty, it can take any call on those floors. Once someone is aboard, it keeps its direction.</p>
+              </div>
+            </div>
+          </article>
+
+          <article class="entry reveal" style="--d: 80ms">
+            <div class="index">03</div>
+            <div>
+              <h3>Freight</h3>
+              <div class="prose">
+                <p>Takes one load at a time. It will not accept a trip that overlaps a passenger already queued, and a trip the other way has to begin past the furthest floor it has already committed to.</p>
+              </div>
+            </div>
+          </article>
+
+          <article class="entry reveal" style="--d: 100ms">
+            <div class="index">04</div>
+            <div>
+              <h3>Penthouse</h3>
+              <div class="prose">
+                <p>Runs only between the lobby and the top floor. Empty, either direction is fine. With a passenger, it keeps going the way it is going.</p>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="shade" id="design" data-section>
+        <div class="wrap">
+          <div class="reveal">
+            <p class="kicker">Design</p>
+            <h2>One question for <em>every car.</em></h2>
+          </div>
+          <div class="prose reveal" style="--d: 80ms">
+            <p>Moving a car up and down is a small problem. The design work was keeping four kinds of elevators understandable at the same time. They follow different rules, and the rest of the program should still treat them the same way. So every car is asked one question: can you take this call? The car answers for itself.</p>
+            <p>That split is the four pillars of object-oriented design. Abstraction lives in <em>Elevator</em> and <em>Scheduler</em>, which name what the simulator needs and leave the rules inside the classes that own them. Encapsulation keeps a car’s floor, direction, and queue private, and it keeps freight’s overlap checks inside the freight car. Inheritance lets the four cars extend <em>Elevator</em> and reuse the checks they share: the call has to exist, the floors have to differ and sit inside the building, and a moving car has to keep its direction. Polymorphism is the payoff. Both schedulers hold a list of elevators and call <em>canTakeCall</em>. The right car’s version runs, and a new kind of car does not need a new branch in the scheduler.</p>
+            <p>SOLID is the same idea, applied one decision at a time. Each class has a single job. A call is a request. An elevator decides and moves. A scheduler assigns. The simulator runs the loop and prints it. A new car extends <em>Elevator</em>, and a new scheduler implements <em>Scheduler</em>, so the cars that already work stay as they are. Any elevator can stand in for any other, because each one honors <em>canTakeCall</em>. The scheduler interface stays small: assign a call, and report the ones left over. Cars are not asked to schedule, and the scheduler is not asked to move. The simulator depends on that interface. At startup it is handed a simple scheduler or a complex one, and the loop is the same either way.</p>
+            <p>A few assumptions kept those rules small enough to test. Floors start at 1, and a request to stay on the same floor is not a trip. Cars begin empty in the lobby, and a moving car does not turn around to pick someone up. Express service means the lobby and the upper half of the building. The penthouse car joins only the lobby and the top floor. Freight carries one load at a time. The simple scheduler takes the first car that says yes. The complex scheduler prefers the car closest to the pickup. Those choices made each test a specific case, and they kept any one car from trying to manage the whole building.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sheet" id="built" data-section>
+        <div class="wrap">
+          <div class="reveal">
+            <p class="kicker">Implementation</p>
+            <h2>Tests first, <em>then the cars.</em></h2>
+          </div>
+          <div class="prose reveal" style="--d: 80ms">
+            <p>I was responsible for the decision each car makes, and for the first version of assignment on the simple scheduler. The simulator, the file of calls, and the complex scheduler came together with the group.</p>
+            <p>I used test-driven development. For each car I wrote JUnit tests that failed on purpose: a null request, a trip outside the building, a car asked to reverse, and the cases that belong to that car alone. Then I filled in <em>canTakeCall</em> until those tests passed. Shared checks moved onto <em>Elevator</em> once the tests made them obvious. Standard, express, freight, and penthouse each got their own answer. Freight took the most code, because a one-line override could not describe overlapping loads or a return trip that has to wait.</p>
+            <p>The first <em>assignCall</em> walked the waiting requests and the elevators and returned the first request a car could take. That was enough to prove the cars and the scheduler could talk through the same question.</p>
+            <p><a class="textlink" href="https://github.com/usd-comp-305/comp-305-project-3-group-2" target="_blank" rel="noopener noreferrer">Group repository <span aria-hidden="true">→</span></a></p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sheet" id="learned" data-section>
+        <div class="wrap">
+          <div class="reveal">
+            <p class="kicker">After</p>
+            <h2>What I got <em>better at.</em></h2>
+          </div>
+          <div class="prose reveal" style="--d: 80ms">
+            <p>The tests were the useful part. They turned each rule into a case I could check, and they showed which rules were shared and which belonged to one car. I got better at putting the variation in one method and letting the rest of the program depend on that. Freight was the reminder that a subclass still needs its own tests when its rules are genuinely different. Writing the failing test before the code made those differences visible early, instead of discovering them while the simulator was already running.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="sheet close">
+      <div class="wrap">
+        <p class="kicker">Home</p>
+        <h2>Back up the ridge.</h2>
+        <div class="links">
+          <a class="textlink" href="index.html">Home <span aria-hidden="true">←</span></a>
+        </div>
+        <p class="fine">© <span id="year">2026</span> Jack Conley</p>
+      </div>
+    </footer>
+
+    <script src="js/woods.js"></script>
+  </body>
+</html>

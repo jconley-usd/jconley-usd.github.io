@@ -488,6 +488,10 @@ p + p {
   padding-block: clamp(4.5rem, 11vh, 8rem);
 }
 
+.sheet.lead .wrap {
+  padding-top: clamp(7.5rem, 16vh, 10.5rem);
+}
+
 .about-grid,
 .boat-grid {
   display: grid;
@@ -676,6 +680,31 @@ p + p {
 
 .film figcaption {
   padding: 0.75rem 0.2rem 0;
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--moss);
+}
+
+.diagram {
+  margin: 2.8rem 0 0;
+}
+
+.diagram-scroll {
+  overflow-x: auto;
+  background: #fff;
+  border: 1px solid var(--line);
+}
+
+.diagram img {
+  display: block;
+  width: 100%;
+  min-width: 920px;
+  height: auto;
+}
+
+.diagram figcaption {
+  padding: 0.85rem 0.15rem 0;
   font-size: 0.78rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
